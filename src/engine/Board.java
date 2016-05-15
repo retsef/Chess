@@ -45,7 +45,7 @@ public class Board implements BoardInterface {
                 break;
             case White:
                 for(int i=0,max=16;i<max;i++) {
-                    coordinate = new Coordinate(Coordinate.ROW.values()[i%8], i>7?2:1);
+                    coordinate = new Coordinate(Coordinate.ROW.values()[i%8], i>7?1:2);
                     piece = getDefaultPiece(coordinate, color);
                     getSquare(coordinate).setPiece(piece);
                 }

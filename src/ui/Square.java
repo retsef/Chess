@@ -15,6 +15,8 @@ public class Square extends JButton {
 
     public Square() {
         super();
+        this.setContentAreaFilled(false);
+        this.setBorderPainted(false);
     }
 
     public static interface ActionListner {
@@ -35,7 +37,7 @@ public class Square extends JButton {
             SwingUtilities.calculateInnerArea(this, innerArea);
 
             g.drawImage(((ImageIcon)icon).getImage(),
-                    innerArea.x-25, innerArea.y-10,
+                    innerArea.x-25, innerArea.y-5,
                     //innerArea.width, innerArea.height,
                     this);
         }

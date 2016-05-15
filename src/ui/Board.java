@@ -57,7 +57,7 @@ public class Board extends JPanel implements BoardInterface {
                     new Square());
             square = this.checkerboard.get(coordinate);
 
-            square.setBounds((i%8)*71+18, row*71+18, 70, 70);
+            square.setBounds((i%8)*71+18, row*71+8, 70, 82);
 
             square.setActionCommand(coordinate.toString());
             square.addActionListener(new ActionListener() {
@@ -68,7 +68,6 @@ public class Board extends JPanel implements BoardInterface {
                 }
             });
 
-            square.setContentAreaFilled(false);
             this.add(square);
         }
     }
@@ -93,7 +92,7 @@ public class Board extends JPanel implements BoardInterface {
                 break;
             case White:
                 for(int i=0,max=16;i<max;i++) {
-                    coordinate = new Coordinate(Coordinate.ROW.values()[i%8], i>7?2:1);
+                    coordinate = new Coordinate(Coordinate.ROW.values()[i%8], i>7?1:2);
                     piece = this.getPiece(coordinate);
                     square = checkerboard.get(coordinate);
                     icon = new ImageIcon(piece.getImage());
