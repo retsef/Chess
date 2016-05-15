@@ -1,16 +1,13 @@
 package pieces;
 
 import engine.Coordinate;
-import util.SpriteSheetLoader;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 
 /**
  * Created by roberto on 15/05/16.
  */
-public abstract class Piece implements ImageObserver {
+public abstract class Piece {
 
     public enum COLOR {
         White, Black;
@@ -43,7 +40,7 @@ public abstract class Piece implements ImageObserver {
     public abstract Image getImage();
 
     @Override
-    public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-        return false;
+    public String toString() {
+        return getColor().toString()+" "+this.getClass().getSimpleName()+" : "+getCoordinate().toString();
     }
 }

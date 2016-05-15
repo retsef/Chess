@@ -31,6 +31,9 @@ public class Game implements Square.ActionListner, BoardInterface {
 
     @Override
     public void OnClick(Coordinate c) {
-        System.out.println(c.toString());
+        Piece piece = board.getPiece(c);
+        piece.setCoordinate(c);
+
+        System.out.println(piece.toString());
     }
 }
