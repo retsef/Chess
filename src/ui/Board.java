@@ -2,6 +2,7 @@ package ui;
 
 import engine.*;
 import interfaces.BoardInterface;
+import javafx.util.Pair;
 import pieces.Piece;
 import ui.Square.*;
 import util.Resources;
@@ -10,10 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by roberto on 15/05/16.
@@ -25,12 +24,10 @@ public class Board extends JPanel implements BoardInterface {
     private ActionListner actionListner;
     private BoardInterface game_boardinterface;
 
-    public Board(ActionListner actionListner, BoardInterface boardInterface) {
+    public Board() {
         super();
 
         checkerboard = new HashMap<>();
-        this.actionListner = actionListner;
-        this.game_boardinterface = boardInterface;
 
         _init();
 
@@ -72,6 +69,14 @@ public class Board extends JPanel implements BoardInterface {
         }
     }
 
+    public void setActionListner(ActionListner actionListner) {
+        this.actionListner = actionListner;
+    }
+
+    public void setGame_boardinterface(BoardInterface game_boardinterface) {
+        this.game_boardinterface = game_boardinterface;
+    }
+
     @Override
     public void setPieces(Piece.COLOR color) {
         Coordinate coordinate = null;
@@ -105,6 +110,15 @@ public class Board extends JPanel implements BoardInterface {
     @Override
     public Piece getPiece(Coordinate c) {
         return game_boardinterface.getPiece(c);
+    }
+
+    @Override
+    public void hightlightSquares(List<Coordinate> coordinateList) {
+        for(Map.Entry<Coordinate, Square> pair: checkerboard.entrySet())
+            pair.getValue().setContentAreaFilled(false);
+
+        for(Coordinate c : coordinateList)
+            checkerboard.get(c).setContentAreaFilled(true);
     }
 
     private class Background extends JPanel {

@@ -32,8 +32,13 @@ public class Window extends JFrame {
 
     private void start() {
         game = new Game();
+        ui_board = new Board();
 
-        ui_board = new Board(game, game);
+        game.setUi_boardinterface(ui_board);
+
+        ui_board.setActionListner(game);
+        ui_board.setGame_boardinterface(game);
+
         ui_board.setPieces(Piece.COLOR.Black);
         ui_board.setPieces(Piece.COLOR.White);
 

@@ -4,6 +4,7 @@ import engine.Coordinate;
 import util.Resources;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by roberto on 15/05/16.
@@ -28,5 +29,10 @@ public class Queen extends Piece {
             default:
                 return Resources.getImage("../assets/images/pieces/QueenW.png");
         }
+    }
+
+    @Override
+    public ArrayList<Coordinate> getPossibleMovement() {
+        return null;
     }
 }

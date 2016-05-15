@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+
 import engine.Coordinate.ROW;
 import interfaces.BoardInterface;
 import pieces.*;
@@ -99,6 +101,11 @@ public class Board implements BoardInterface {
 
     public Square getSquare(Coordinate c) {
         return checkerboard.get(c);
+    }
+
+    @Override
+    public void hightlightSquares(List<Coordinate> coordinateList) {
+
     }
 
     @Override

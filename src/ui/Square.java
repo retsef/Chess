@@ -4,6 +4,8 @@ import engine.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by roberto on 15/05/16.
@@ -17,6 +19,19 @@ public class Square extends JButton {
         super();
         this.setContentAreaFilled(false);
         this.setBorderPainted(false);
+
+        this.setBackground(new Color(239,204,58,180));
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent m) {
+                setBackground(new Color(239,204,58,200));
+            }
+            @Override
+            public void mouseExited(MouseEvent m) {
+                setBackground(new Color(239,204,58,180));
+            }
+        });
     }
 
     public static interface ActionListner {

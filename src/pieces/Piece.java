@@ -3,6 +3,7 @@ package pieces;
 import engine.Coordinate;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by roberto on 15/05/16.
@@ -38,6 +39,8 @@ public abstract class Piece {
     }
 
     public abstract Image getImage();
+
+    public abstract ArrayList<Coordinate> getPossibleMovement();
 
     @Override
     public String toString() {
