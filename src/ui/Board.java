@@ -113,12 +113,29 @@ public class Board extends JPanel implements BoardInterface {
     }
 
     @Override
+    public void movePiece(Piece piece, Coordinate c) {
+        Square square_start = checkerboard.get(piece.getCoordinate());
+        Square square_end = checkerboard.get(c);
+
+        square_start.removeIcon();
+        square_end.setIcon(new ImageIcon(piece.getImage()));
+
+        square_start.repaint();
+        clearHightlightSquares();
+    }
+
+    @Override
     public void hightlightSquares(List<Coordinate> coordinateList) {
-        for(Map.Entry<Coordinate, Square> pair: checkerboard.entrySet())
-            pair.getValue().setContentAreaFilled(false);
+        clearHightlightSquares();
 
         for(Coordinate c : coordinateList)
             checkerboard.get(c).setContentAreaFilled(true);
+    }
+
+    @Override
+    public void clearHightlightSquares() {
+        for(Map.Entry<Coordinate, Square> pair: checkerboard.entrySet())
+            pair.getValue().setContentAreaFilled(false);
     }
 
     private class Background extends JPanel {

@@ -37,13 +37,19 @@ public class Bishop extends Piece {
 
         Coordinate.ROW current_row = getCoordinate().getRow();
         int current_comlumn = getCoordinate().getColumn();
+
+        for(int i=0,max=14;i<max;i++) {
+
+        }
+        /*
         for(int i=0,max=16;i<max;i++)
             squares.add(new Coordinate(
                     Coordinate.ROW.values()[i%8],
-                    i<7?(i%8)+1:Math.abs((i%8)-8)));
+                    i<8?(i%8)+1:Math.abs((i%8)-8)));
 
         squares.remove(getCoordinate());
         squares.remove(getCoordinate());
+        */
 
         return squares;
     }

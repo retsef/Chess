@@ -64,4 +64,47 @@ public class Coordinate {
     public int hashCode() {
         return this.row.hashCode()+this.column;
     }
+
+
+    /**
+     * Funzioni di confronto
+     */
+    public boolean isBeforeRow(ROW row) {
+        int current_row = this.getRow().ordinal();
+        int request_row = row.ordinal();
+
+        return current_row-request_row > 0;
+    }
+
+    public boolean isAfterRow(ROW row) {
+        return !isBeforeRow(row);
+    }
+
+    public boolean isOnFirstRow() {
+        return this.getRow().equals(ROW.A);
+    }
+
+    public boolean isOnLastRow() {
+        return this.getRow().equals(ROW.H);
+    }
+
+    public boolean isBeforeColumn(int column) {
+        int current_column = this.getColumn();
+        int request_column = column;
+
+        return current_column-request_column > 0;
+    }
+
+    public boolean isAfterColumn(int column) {
+        return !isBeforeColumn(column);
+    }
+
+    public boolean isOnFirstColumn() {
+        return this.getColumn() == 1;
+    }
+
+    public boolean isOnLastColumn() {
+        return this.getColumn() == 8;
+    }
+
 }

@@ -34,6 +34,26 @@ public class Pawn extends Piece {
     @Override
     public ArrayList<Coordinate> getPossibleMovement() {
         ArrayList <Coordinate> squares = new ArrayList<>();
+
+        Coordinate.ROW current_row = getCoordinate().getRow();
+        int current_comlumn = getCoordinate().getColumn();
+
+        switch (getColor()) {
+            case White:
+                if (current_comlumn == 2) {
+                    squares.add(new Coordinate(current_row, 3));
+                    squares.add(new Coordinate(current_row, 4));
+                }
+                break;
+            case Black:
+                if (current_comlumn == 7) {
+                    squares.add(new Coordinate(current_row, 6));
+                    squares.add(new Coordinate(current_row, 5));
+                }
+
+                break;
+        }
+
         return squares;
     }
 }

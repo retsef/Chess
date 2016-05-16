@@ -15,6 +15,8 @@ import pieces.*;
 public class Board implements BoardInterface {
 
     private HashMap<Coordinate, Square> checkerboard;
+    private Piece disputed_piece;
+    //private Square disputed_square;
 
     public Board() {
         _init();
@@ -103,14 +105,43 @@ public class Board implements BoardInterface {
         return checkerboard.get(c);
     }
 
+    public boolean isPiecePresent(Coordinate c) {
+        return getSquare(c).isPiecePresent();
+    }
+
     @Override
     public void hightlightSquares(List<Coordinate> coordinateList) {
 
     }
 
     @Override
+    public void clearHightlightSquares() {
+
+    }
+
+    @Override
     public Piece getPiece(Coordinate c) {
         return getSquare(c).getPiece();
+    }
+
+    @Override
+    public void movePiece(Piece piece, Coordinate c) {
+        this.getSquare(piece.getCoordinate()).removePiece(); //rimmuovo il vecchio pezzo
+        this.getSquare(c).setPiece(piece); //sposto il pezzo
+
+        clearHightlightSquares();
+    }
+
+    public Piece getDisputed_piece() {
+        return disputed_piece;
+    }
+
+    public void setDisputed_piece(Piece disputed_piece) {
+        this.disputed_piece = disputed_piece;
+    }
+
+    public void removeDisputed_piece() {
+        this.disputed_piece = null;
     }
 
 }

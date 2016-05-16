@@ -34,6 +34,17 @@ public class Queen extends Piece {
     @Override
     public ArrayList<Coordinate> getPossibleMovement() {
         ArrayList <Coordinate> squares = new ArrayList<>();
+
+        Coordinate.ROW current_row = getCoordinate().getRow();
+        int current_comlumn = getCoordinate().getColumn();
+        for(int i=0,max=16;i<max;i++)
+            squares.add(new Coordinate(
+                    i<8?current_row:Coordinate.ROW.values()[i%8],
+                    i<8?(i%8)+1:current_comlumn));
+
+        squares.remove(getCoordinate());
+        squares.remove(getCoordinate());
+
         return squares;
     }
 }

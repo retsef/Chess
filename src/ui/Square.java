@@ -53,6 +53,10 @@ public class Square extends JButton {
         this.icon = defaultIcon;
     }
 
+    public void removeIcon() {
+        this.icon = null;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

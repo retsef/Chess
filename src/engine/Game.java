@@ -44,16 +44,40 @@ public class Game implements Square.ActionListner, BoardInterface {
     }
 
     @Override
+    public void clearHightlightSquares() {
+        board.clearHightlightSquares();
+        this.ui_boardinterface.clearHightlightSquares();
+    }
+
+    @Override
+    public void movePiece(Piece piece, Coordinate c) {
+        board.movePiece(piece, c);
+        this.ui_boardinterface.movePiece(piece, c);
+    }
+
+    @Override
     public void OnClick(Coordinate c) {
         if (board.getSquare(c).isPiecePresent()) {
             Piece piece = board.getPiece(c);
             piece.setCoordinate(c);
+
+            board.setDisputed_piece(piece); //salvo il pezzo selezionato
 
             System.out.println(piece.toString());
             ArrayList<Coordinate> arr = piece.getPossibleMovement();
             //System.out.println(arr.size());
 
             this.hightlightSquares(arr);
+        } else {
+            Piece piece = board.getDisputed_piece(); //richiamo l'ultimo pezzo selecionato
+            if (piece!=null) {
+                ArrayList<Coordinate> arr = piece.getPossibleMovement();
+                if (arr.contains(c))
+                    this.movePiece(piece, c);
+                board.removeDisputed_piece();
+            }
         }
     }
+
+
 }

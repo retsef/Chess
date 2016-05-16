@@ -17,4 +17,8 @@ public interface BoardInterface {
 
     public void hightlightSquares(List<Coordinate> coordinateList);
 
+    public void clearHightlightSquares();
+
+    public void movePiece(Piece piece, Coordinate c);
+
 }

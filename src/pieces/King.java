@@ -34,6 +34,11 @@ public class King extends Piece {
     @Override
     public ArrayList<Coordinate> getPossibleMovement() {
         ArrayList <Coordinate> squares = new ArrayList<>();
+
+        Coordinate.ROW current_row = getCoordinate().getRow();
+        int current_comlumn = getCoordinate().getColumn();
+
+
         return squares;
     }
 }
