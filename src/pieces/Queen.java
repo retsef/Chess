@@ -33,6 +33,7 @@ public class Queen extends Piece {
 
     @Override
     public ArrayList<Coordinate> getPossibleMovement() {
-        return null;
+        ArrayList <Coordinate> squares = new ArrayList<>();
+        return squares;
     }
 }

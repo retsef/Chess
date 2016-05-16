@@ -1,6 +1,7 @@
 package ui;
 
 import engine.Coordinate;
+import util.Resources;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,13 +16,20 @@ public class Square extends JButton {
     private Icon icon;
     private final Rectangle innerArea = new Rectangle();
 
+    private Icon highlight;
+
     public Square() {
         super();
         this.setContentAreaFilled(false);
         this.setBorderPainted(false);
 
-        this.setBackground(new Color(239,204,58,180));
+        //hightlight_on = new Color(239,204,58,180);
+        this.setBackground(new Color(0,0,0,0));
 
+        try {
+            this.highlight = new ImageIcon(Resources.getImage("../assets/images/highlight.png"));
+        } catch (Exception e) { e.printStackTrace(); }
+        /*
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent m) {
@@ -32,6 +40,7 @@ public class Square extends JButton {
                 setBackground(new Color(239,204,58,180));
             }
         });
+        */
     }
 
     public static interface ActionListner {
@@ -47,15 +56,24 @@ public class Square extends JButton {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        SwingUtilities.calculateInnerArea(this, innerArea);
 
+        //paint background
+        if(isContentAreaFilled()) {
+            g.drawImage(((ImageIcon)this.highlight).getImage(),
+                    0, innerArea.y+5,
+                    this);
+        }
+
+        //paint icon
         if (icon != null) {
-            SwingUtilities.calculateInnerArea(this, innerArea);
 
-            g.drawImage(((ImageIcon)icon).getImage(),
+            g.drawImage(((ImageIcon)this.icon).getImage(),
                     innerArea.x-25, innerArea.y-5,
                     //innerArea.width, innerArea.height,
                     this);
         }
+
     }
 
 }

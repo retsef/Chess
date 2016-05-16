@@ -45,13 +45,15 @@ public class Game implements Square.ActionListner, BoardInterface {
 
     @Override
     public void OnClick(Coordinate c) {
-        Piece piece = board.getPiece(c);
-        piece.setCoordinate(c);
+        if (board.getSquare(c).isPiecePresent()) {
+            Piece piece = board.getPiece(c);
+            piece.setCoordinate(c);
 
-        System.out.println(piece.toString());
-        ArrayList<Coordinate> arr = piece.getPossibleMovement();
-        System.out.println(arr.size());
+            System.out.println(piece.toString());
+            ArrayList<Coordinate> arr = piece.getPossibleMovement();
+            //System.out.println(arr.size());
 
-        this.hightlightSquares(arr);
+            this.hightlightSquares(arr);
+        }
     }
 }
