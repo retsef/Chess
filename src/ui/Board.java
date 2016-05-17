@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.istack.internal.Nullable;
 import engine.*;
 import interfaces.BoardInterface;
 import javafx.util.Pair;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by roberto on 15/05/16.
  */
-public class Board extends JPanel implements BoardInterface {
+public class Board extends JPanel implements BoardInterface<Square> {
 
     private Background background;
     private HashMap<Coordinate, Square> checkerboard;
@@ -110,6 +111,17 @@ public class Board extends JPanel implements BoardInterface {
     @Override
     public Piece getPiece(Coordinate c) {
         return game_boardinterface.getPiece(c);
+    }
+
+    @Override
+    public Square getSquare(Coordinate c) {
+        return checkerboard.get(c);
+    }
+
+    @Nullable
+    @Override
+    public List<Square> getSquares(Coordinate start, Coordinate end) {
+        return null;
     }
 
     @Override

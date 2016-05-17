@@ -1,6 +1,8 @@
 package pieces;
 
 import engine.Coordinate;
+import engine.Square;
+import interfaces.BoardInterface;
 import util.Resources;
 
 import java.awt.*;
@@ -32,7 +34,7 @@ public class King extends Piece {
     }
 
     @Override
-    public ArrayList<Coordinate> getPossibleMovement() {
+    public ArrayList<Coordinate> getPossibleMovement(BoardInterface<Square> boardInterface) {
         ArrayList <Coordinate> squares = new ArrayList<>();
 
         Coordinate.ROW current_row = getCoordinate().getRow();

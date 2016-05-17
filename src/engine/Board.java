@@ -12,7 +12,7 @@ import pieces.*;
 /**
  * Created by roberto on 15/05/16.
  */
-public class Board implements BoardInterface {
+public class Board implements BoardInterface<Square> {
 
     private HashMap<Coordinate, Square> checkerboard;
     private Piece disputed_piece;
@@ -101,8 +101,45 @@ public class Board implements BoardInterface {
 
     }
 
+    @Override
     public Square getSquare(Coordinate c) {
         return checkerboard.get(c);
+    }
+
+    @Override
+    public List<Square> getSquares(Coordinate start, Coordinate end) {
+        ArrayList<Square> squares = new ArrayList<>();
+
+        int i,max, gap=0;
+        Coordinate c = null;
+
+        if(start.isBeforRow(end)) {
+            gap = end.getRow().ordinal()-start.getRow().ordinal();
+            for(i=0,max=gap;i<max;i++) {
+                c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
+                squares.add(checkerboard.get(c));
+            }
+        } else if (start.isAfterRow(end)) {
+            gap = start.getRow().ordinal()-end.getRow().ordinal();
+            for(i=0,max=gap;i<max;i++) {
+                c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
+                squares.add(checkerboard.get(c));
+            }
+        } else if (start.isBeforeColumn(end)) {
+            gap = end.getColumn()-start.getColumn();
+            for(i=1,max=gap;i<max;i++) {
+                c = new Coordinate(start.getRow(),i);
+                squares.add(checkerboard.get(c));
+            }
+        } else if (start.isAfterColumn(end)) {
+            gap = start.getColumn()-end.getColumn();
+            for(i=1,max=gap;i<max;i++) {
+                c = new Coordinate(start.getRow(),i);
+                squares.add(checkerboard.get(c));
+            }
+        }
+
+        return squares;
     }
 
     public boolean isPiecePresent(Coordinate c) {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by roberto on 15/05/16.
  */
-public class Game implements Square.ActionListner, BoardInterface {
+public class Game implements Square.ActionListner, BoardInterface<engine.Square> {
 
     private Board board;
     private BoardInterface ui_boardinterface;
@@ -39,6 +39,16 @@ public class Game implements Square.ActionListner, BoardInterface {
     @Override
     public Piece getPiece(Coordinate c) {
         return board.getPiece(c);
+    }
+
+    @Override
+    public engine.Square getSquare(Coordinate c) {
+        return board.getSquare(c);
+    }
+
+    @Override
+    public List<engine.Square> getSquares(Coordinate start, Coordinate end) {
+        return board.getSquares(start,end);
     }
 
     @Override
@@ -75,13 +85,14 @@ public class Game implements Square.ActionListner, BoardInterface {
             board.setDisputed_piece(piece); //salvo il pezzo selezionato
 
             System.out.println(piece.toString());
-            ArrayList<Coordinate> arr = piece.getPossibleMovement();
+            ArrayList<Coordinate> arr = piece.getPossibleMovement(this);
 
             this.hightlightSquares(arr);
         } else {
+            System.out.println(c.toString());
             Piece piece = board.getDisputed_piece(); //richiamo l'ultimo pezzo selecionato
             if (piece!=null) {
-                ArrayList<Coordinate> arr = piece.getPossibleMovement();
+                ArrayList<Coordinate> arr = piece.getPossibleMovement(this);
                 if (arr.contains(c))
                     this.movePiece(piece, c);
             }

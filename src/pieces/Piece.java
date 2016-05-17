@@ -1,6 +1,8 @@
 package pieces;
 
 import engine.Coordinate;
+import engine.Square;
+import interfaces.BoardInterface;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public abstract class Piece {
 
     public abstract Image getImage();
 
-    public abstract ArrayList<Coordinate> getPossibleMovement();
+    public abstract ArrayList<Coordinate> getPossibleMovement(BoardInterface<Square> boardInterface);
 
     @Override
     public String toString() {

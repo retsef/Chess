@@ -1,6 +1,8 @@
 package pieces;
 
 import engine.Coordinate;
+import engine.Square;
+import interfaces.BoardInterface;
 import util.Resources;
 
 import java.awt.*;
@@ -32,25 +34,37 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public ArrayList<Coordinate> getPossibleMovement() {
+    public ArrayList<Coordinate> getPossibleMovement(BoardInterface<Square> boardInterface) {
         ArrayList <Coordinate> squares = new ArrayList<>();
 
         Coordinate.ROW current_row = getCoordinate().getRow();
         int current_comlumn = getCoordinate().getColumn();
 
+        Coordinate c = null;
         switch (getColor()) {
             case White:
-                if (current_comlumn == 2) {
-                    squares.add(new Coordinate(current_row, 3));
-                    squares.add(new Coordinate(current_row, 4));
+                if(current_comlumn != 8) {//fine della scacchiera
+                    c = new Coordinate(current_row, current_comlumn + 1);
+                    if(!boardInterface.getSquare(c).isPiecePresent())
+                        squares.add(c);
+                }
+                if(current_comlumn == 2) {//partenza
+                    c = new Coordinate(current_row, current_comlumn + 2);
+                    if(!boardInterface.getSquare(c).isPiecePresent())
+                        squares.add(c);
                 }
                 break;
             case Black:
-                if (current_comlumn == 7) {
-                    squares.add(new Coordinate(current_row, 6));
-                    squares.add(new Coordinate(current_row, 5));
+                if(current_comlumn != 1) {//fine della scacchiera
+                    c = new Coordinate(current_row, current_comlumn - 1);
+                    if (!boardInterface.getSquare(c).isPiecePresent())
+                        squares.add(c);
                 }
-
+                if(current_comlumn == 7) { //partenza
+                    c = new Coordinate(current_row, current_comlumn - 2);
+                    if (!boardInterface.getSquare(c).isPiecePresent())
+                        squares.add(c);
+                }
                 break;
         }
 

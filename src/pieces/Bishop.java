@@ -1,6 +1,7 @@
 package pieces;
 
 import engine.Coordinate;
+import interfaces.BoardInterface;
 import util.Resources;
 
 import java.awt.*;
@@ -32,7 +33,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public ArrayList<Coordinate> getPossibleMovement() {
+    public ArrayList<Coordinate> getPossibleMovement(BoardInterface boardInterface) {
         ArrayList <Coordinate> squares = new ArrayList<>();
 
         Coordinate.ROW current_row = getCoordinate().getRow();

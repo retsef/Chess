@@ -69,15 +69,26 @@ public class Coordinate {
     /**
      * Funzioni di confronto
      */
+    public boolean isBeforRow(Coordinate c) {
+        return isBeforeRow(c.getRow());
+    }
+
+    public boolean isAfterRow(Coordinate c) {
+        return isAfterRow(c.getRow());
+    }
+
     public boolean isBeforeRow(ROW row) {
         int current_row = this.getRow().ordinal();
         int request_row = row.ordinal();
 
-        return current_row-request_row > 0;
+        return request_row-current_row > 0;
     }
 
     public boolean isAfterRow(ROW row) {
-        return !isBeforeRow(row);
+        int current_row = this.getRow().ordinal();
+        int request_row = row.ordinal();
+
+        return current_row-request_row > 0;
     }
 
     public boolean isOnFirstRow() {
@@ -88,15 +99,28 @@ public class Coordinate {
         return this.getRow().equals(ROW.H);
     }
 
+
+
     public boolean isBeforeColumn(int column) {
+        int current_column = this.getColumn();
+        int request_column = column;
+
+        return request_column-current_column > 0;
+    }
+
+    public boolean isAfterColumn(int column) {
         int current_column = this.getColumn();
         int request_column = column;
 
         return current_column-request_column > 0;
     }
 
-    public boolean isAfterColumn(int column) {
-        return !isBeforeColumn(column);
+    public boolean isBeforeColumn(Coordinate c) {
+        return isBeforeColumn(c.getColumn());
+    }
+
+    public boolean isAfterColumn(Coordinate c) {
+        return isAfterColumn(c.getColumn());
     }
 
     public boolean isOnFirstColumn() {
