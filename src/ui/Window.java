@@ -2,8 +2,11 @@ package ui;
 
 import engine.Game;
 import pieces.Piece;
+import util.Resources;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by roberto on 15/05/16.
@@ -28,6 +31,11 @@ public class Window extends JFrame {
 
         this.setSize(600, 625);
         this.setLocationRelativeTo(null);
+
+        try {
+            BufferedImage image = Resources.getImage("../assets/images/Chess.png");
+            this.setIconImage(image);
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     private void start() {
