@@ -37,8 +37,55 @@ public class King extends Piece {
     public ArrayList<Coordinate> getPossibleMovement(BoardInterface<Square> boardInterface) {
         ArrayList <Coordinate> squares = new ArrayList<>();
 
-        Coordinate.ROW current_row = getCoordinate().getRow();
-        int current_comlumn = getCoordinate().getColumn();
+        Coordinate c = getCoordinate();
+        Coordinate c_tmp = null;
+
+        /* <- A -> */
+        if (!c.isOnFirstColumn()) { //
+            c_tmp = new Coordinate(c.getRow(), c.getColumn() - 1);
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+        if (!c.isOnLastColumn()) { //
+            c_tmp = new Coordinate(c.getRow(), c.getColumn()+1);
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+
+        /* ^- A -v */
+        if (!c.isOnFirstRow()) { //
+            c_tmp = new Coordinate(Coordinate.ROW.values()[c.getRow().ordinal()-1], c.getColumn());
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+        if (!c.isOnLastRow()) { //
+            c_tmp = new Coordinate(Coordinate.ROW.values()[c.getRow().ordinal()+1], c.getColumn());
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+
+        /* ^\   /^
+         * v/ A \v */
+        if (!c.isOnFirstRow() && !c.isOnFirstColumn()) { //
+            c_tmp = new Coordinate(Coordinate.ROW.values()[c.getRow().ordinal()-1], c.getColumn()-1);
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+        if (!c.isOnLastRow() && !c.isOnFirstColumn()) { //
+            c_tmp = new Coordinate(Coordinate.ROW.values()[c.getRow().ordinal()+1], c.getColumn()-1);
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+        if (!c.isOnFirstRow() && !c.isOnLastColumn()) { //
+            c_tmp = new Coordinate(Coordinate.ROW.values()[c.getRow().ordinal()-1], c.getColumn()+1);
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
+        if (!c.isOnLastRow() && !c.isOnLastColumn()) { //
+            c_tmp = new Coordinate(Coordinate.ROW.values()[c.getRow().ordinal()+1], c.getColumn()+1);
+            if(!boardInterface.getSquare(c_tmp).isPiecePresent())
+                squares.add(c_tmp);
+        }
 
 
         return squares;
