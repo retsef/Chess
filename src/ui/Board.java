@@ -38,6 +38,7 @@ public class Board extends JPanel implements BoardInterface<Square> {
 
     private void _init() {
         this.setLayout(null);
+        this.setBounds(0,0, 600, 625);
 
         Coordinate coordinate = null;
         Square square = null;

@@ -1,5 +1,6 @@
 package engine;
 
+import interfaces.ArbitratorInterface;
 import interfaces.BoardInterface;
 import pieces.Piece;
 import pieces.Piece.COLOR;
@@ -29,6 +30,10 @@ public class Game implements Square.ActionListner, BoardInterface<engine.Square>
 
     public void setUi_boardinterface(BoardInterface ui_boardinterface) {
         this.ui_boardinterface = ui_boardinterface;
+    }
+
+    public void setUi_arbitratorinterface(ArbitratorInterface ui_arbitratorinterface) {
+        arbitrator.setInterface(ui_arbitratorinterface);
     }
 
     @Override
