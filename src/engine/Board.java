@@ -119,17 +119,18 @@ public class Board implements BoardInterface<Square> {
         if(start.equals(end)) {
             squares.add(checkerboard.get(start));
         } else if(start.isBeforRow(end)) {
-            gap = end.getRow().ordinal()-start.getRow().ordinal();
+            gap = (end.getRow().ordinal()-start.getRow().ordinal())+1;
             for(i=0,max=gap;i<max;i++) {
                 c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
                 squares.add(checkerboard.get(c));
             }
         } else if (start.isAfterRow(end)) {
-            gap = start.getRow().ordinal()-end.getRow().ordinal();
+            gap = (start.getRow().ordinal()-end.getRow().ordinal())+1;
             for(i=0,max=gap;i<max;i++) {
                 c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
                 squares.add(checkerboard.get(c));
             }
+            Collections.reverse(squares);
         } else if (start.isBeforeColumn(end)) {
             gap = (end.getColumn()-(start.getColumn()-1))+1;
             for(i=start.getColumn(),max=gap;i<max;i++) {
