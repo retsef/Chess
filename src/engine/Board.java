@@ -1,9 +1,6 @@
 package engine;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import engine.Coordinate.ROW;
 import interfaces.BoardInterface;
@@ -26,11 +23,17 @@ public class Board implements BoardInterface<Square> {
         checkerboard = new HashMap<>();
 
         int row = 0;
+        Coordinate coordinate = null;
+        Square.COLOR color = null;
         for(int i=0,max=64; i<max; i++) {
             row = i%8==0 ? row+1 : row;
+            coordinate = new Coordinate(ROW.values()[i%8], row);
+            color = row%2 == 0 ?
+                    i%2 == 0 ? Square.COLOR.WHITE : Square.COLOR.BLACK :
+                    i%2 == 0 ? Square.COLOR.BLACK : Square.COLOR.WHITE;
             checkerboard.put(
-                    new Coordinate(ROW.values()[i%8], row),
-                    new Square(Square.COLOR.values()[i%2]));
+                    coordinate,
+                    new Square(color, coordinate));
         }
     }
 
@@ -113,7 +116,9 @@ public class Board implements BoardInterface<Square> {
         int i,max, gap=0;
         Coordinate c = null;
 
-        if(start.isBeforRow(end)) {
+        if(start.equals(end)) {
+            squares.add(checkerboard.get(start));
+        } else if(start.isBeforRow(end)) {
             gap = end.getRow().ordinal()-start.getRow().ordinal();
             for(i=0,max=gap;i<max;i++) {
                 c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
@@ -126,17 +131,18 @@ public class Board implements BoardInterface<Square> {
                 squares.add(checkerboard.get(c));
             }
         } else if (start.isBeforeColumn(end)) {
-            gap = end.getColumn()-start.getColumn();
-            for(i=1,max=gap;i<max;i++) {
+            gap = (end.getColumn()-(start.getColumn()-1))+1;
+            for(i=start.getColumn(),max=gap;i<max;i++) {
                 c = new Coordinate(start.getRow(),i);
                 squares.add(checkerboard.get(c));
             }
         } else if (start.isAfterColumn(end)) {
-            gap = start.getColumn()-end.getColumn();
+            gap = (start.getColumn()-(end.getColumn()-1))+1;
             for(i=1,max=gap;i<max;i++) {
                 c = new Coordinate(start.getRow(),i);
                 squares.add(checkerboard.get(c));
             }
+            Collections.reverse(squares);
         }
 
         return squares;
