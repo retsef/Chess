@@ -1,6 +1,7 @@
 package pieces;
 
 import engine.Coordinate;
+import engine.Square;
 import interfaces.BoardInterface;
 import util.Resources;
 
@@ -33,19 +34,48 @@ public class Queen extends Piece {
     }
 
     @Override
-    public ArrayList<Coordinate> getPossibleMovement(BoardInterface boardInterface) {
+    public ArrayList<Coordinate> getPossibleMovement(BoardInterface<Square> boardInterface) {
+        ArrayList <Coordinate> squares = new ArrayList<>();
+
+        squares.addAll(_rowsPossibleMovement(boardInterface));
+
+        return squares;
+    }
+
+    private ArrayList<Coordinate> _rowsPossibleMovement(BoardInterface<Square> boardInterface) {
         ArrayList <Coordinate> squares = new ArrayList<>();
 
         Coordinate.ROW current_row = getCoordinate().getRow();
         int current_comlumn = getCoordinate().getColumn();
-        for(int i=0,max=16;i<max;i++)
-            squares.add(new Coordinate(
-                    i<8?current_row:Coordinate.ROW.values()[i%8],
-                    i<8?(i%8)+1:current_comlumn));
+
+        Coordinate c = null;
+        ArrayList <Square> gap = new ArrayList<>();
+        for(int i=0,max=16;i<max;i++) {
+            c = new Coordinate(
+                    i < 8 ? current_row : Coordinate.ROW.values()[i % 8],
+                    i < 8 ? (i % 8) + 1 : current_comlumn);
+            if(!boardInterface.getSquare(c).isPiecePresent()) { //esclude le caselle gia' occupate
+                //squares.add(c);
+                //esclude le caselle insaccessibili (gap)
+                gap.clear();
+                gap.addAll(boardInterface.getSquares(getCoordinate(), c));
+                gap.remove(boardInterface.getSquare(getCoordinate()));
+                //gap.remove(boardInterface.getSquare(c));
+
+                int piece_count = 0;
+                for (Square sq: gap) {
+                    if(sq.isPiecePresent())
+                        piece_count += 1;
+                }
+                if(piece_count==0)
+                    squares.add(c);
+            }
+        }
 
         squares.remove(getCoordinate());
         squares.remove(getCoordinate());
 
         return squares;
     }
+
 }
