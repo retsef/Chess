@@ -138,8 +138,8 @@ public class Board implements BoardInterface<Square> {
                 squares.add(checkerboard.get(c));
             }
         } else if (start.isAfterColumn(end)) {
-            gap = (start.getColumn()-(end.getColumn()-1))+1;
-            for(i=1,max=gap;i<max;i++) {
+            gap = (start.getColumn()-end.getColumn())+1;
+            for(i=end.getColumn(),max=end.getColumn()+gap;i<max;i++) {
                 c = new Coordinate(start.getRow(),i);
                 squares.add(checkerboard.get(c));
             }

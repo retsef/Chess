@@ -51,8 +51,8 @@ public class Rock extends Piece {
                 //esclude le caselle insaccessibili (gap)
                 gap.clear();
                 gap.addAll(boardInterface.getSquares(getCoordinate(), c));
-                gap.remove(getCoordinate());
-                gap.remove(c);
+                gap.remove(boardInterface.getSquare(getCoordinate()));
+                //gap.remove(boardInterface.getSquare(c));
 
                 int piece_count = 0;
                 for (Square sq: gap) {
