@@ -93,6 +93,26 @@ public class BoardTest {
     }
 
     @Test
+    public void board_squares_from_H4_to_H8() {
+        Coordinate start = new Coordinate(Coordinate.ROW.H, 4);
+        Coordinate end = new Coordinate(Coordinate.ROW.H, 8);
+
+        //Expected
+        ArrayList<Square> expect = new ArrayList<>();
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.H, 4)));
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.H, 5)));
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.H, 6)));
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.H, 7)));
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.H, 8)));
+
+        //Result
+        ArrayList<Square> result = new ArrayList<>(board.getSquares(start,end));
+
+        //Then
+        Assert.assertEquals(expect,result);
+    }
+
+    @Test
     public void board_squares_from_A1_to_E1() {
         Coordinate start = new Coordinate(Coordinate.ROW.A, 1);
         Coordinate end = new Coordinate(Coordinate.ROW.E, 1);

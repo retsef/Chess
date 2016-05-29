@@ -132,8 +132,8 @@ public class Board implements BoardInterface<Square> {
             }
             Collections.reverse(squares);
         } else if (start.isBeforeColumn(end)) {
-            gap = (end.getColumn()-(start.getColumn()-1))+1;
-            for(i=start.getColumn(),max=gap;i<max;i++) {
+            gap = (end.getColumn()-start.getColumn())+1;
+            for(i=start.getColumn(),max=start.getColumn()+gap;i<max;i++) {
                 c = new Coordinate(start.getRow(),i);
                 squares.add(checkerboard.get(c));
             }
