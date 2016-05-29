@@ -120,13 +120,13 @@ public class Board implements BoardInterface<Square> {
             squares.add(checkerboard.get(start));
         } else if(start.isBeforRow(end)) {
             gap = (end.getRow().ordinal()-start.getRow().ordinal())+1;
-            for(i=0,max=gap;i<max;i++) {
+            for(i=start.getRow().ordinal(),max=start.getRow().ordinal()+gap;i<max;i++) {
                 c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
                 squares.add(checkerboard.get(c));
             }
         } else if (start.isAfterRow(end)) {
             gap = (start.getRow().ordinal()-end.getRow().ordinal())+1;
-            for(i=0,max=gap;i<max;i++) {
+            for(i=end.getRow().ordinal(),max=end.getRow().ordinal()+gap;i<max;i++) {
                 c = new Coordinate(Coordinate.ROW.values()[i],start.getColumn());
                 squares.add(checkerboard.get(c));
             }

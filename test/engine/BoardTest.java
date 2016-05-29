@@ -154,4 +154,46 @@ public class BoardTest {
         Assert.assertEquals(expect,result);
     }
 
+    @Test
+    public void board_squares_from_H1_to_D1() {
+        Coordinate start = new Coordinate(Coordinate.ROW.H, 1);
+        Coordinate end = new Coordinate(Coordinate.ROW.D, 1);
+
+        //Expected
+        ArrayList<Square> expect = new ArrayList<>();
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.H, 1)));
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.G, 1)));
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.F, 1)));
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.E, 1)));
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.D, 1)));
+
+
+        //Result
+        ArrayList<Square> result = new ArrayList<>(board.getSquares(start,end));
+
+        //Then
+        Assert.assertEquals(expect,result);
+    }
+
+    @Test
+    public void board_squares_from_D1_to_H1() {
+        Coordinate start = new Coordinate(Coordinate.ROW.D, 1);
+        Coordinate end = new Coordinate(Coordinate.ROW.H, 1);
+
+        //Expected
+        ArrayList<Square> expect = new ArrayList<>();
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.D, 1)));
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.E, 1)));
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.F, 1)));
+        expect.add(new Square(Square.COLOR.BLACK, new Coordinate(Coordinate.ROW.G, 1)));
+        expect.add(new Square(Square.COLOR.WHITE, new Coordinate(Coordinate.ROW.H, 1)));
+
+
+        //Result
+        ArrayList<Square> result = new ArrayList<>(board.getSquares(start,end));
+
+        //Then
+        Assert.assertEquals(expect,result);
+    }
+
 }
